@@ -36,7 +36,6 @@ header p{margin:0; color:var(--muted)}
   will-change: transform;
 }
 .card .mathwrap{font-size:28px; line-height:1.35; margin:0}
-/* Make MathJax output slightly larger like textbook display math */
 mjx-container[jax="CHTML"]{font-size: 125%}
 .card .hint{position:absolute; top:14px; right:16px; font-size:12px; color:var(--muted)}
 .card.good::after,
@@ -59,7 +58,9 @@ mjx-container[jax="CHTML"]{font-size: 125%}
   font-weight:700; cursor:pointer;
 }
 #buttons button:hover{border-color:#334155}
-#feedback{height:28px; display:grid; place-items:center; color:var(--muted); margin-top:10px}
+#feedback{height:28px; display:grid; place-items:center; color:var(--muted); margin-top:10px; font-weight:700}
+#feedback.good{color:var(--good)}
+#feedback.bad{color:var(--bad)}
 #result{text-align:center; margin-top:30px}
 #result button{
   margin-top:8px; background:#0b1220; color:var(--text);

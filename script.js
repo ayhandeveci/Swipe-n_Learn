@@ -1,4 +1,4 @@
-// Türev Tokadı — Fixes: MathJax ready + truthful feedback labels
+// Türev Tokadı v2 — Feedback follows swipe direction
 const DECK = document.getElementById('deck');
 const COUNT = document.getElementById('count');
 const POINTS = document.getElementById('points');
@@ -28,7 +28,6 @@ async function loadCards() {
 }
 
 function typeset(el){
-  // Ensure MathJax has loaded
   if (window.MathJax && MathJax.startup && MathJax.typesetPromise) {
     return MathJax.startup.promise.then(()=>MathJax.typesetPromise([el])).catch(()=>{});
   }
@@ -39,7 +38,6 @@ function cardElement(item, z) {
   el.className = 'card';
   el.style.zIndex = z;
   const content = item.tex ? item.tex : item.text;
-  // force display style look with $$ ... $$ when tex given
   const body = item.tex ? `$$${content.replace(/^\$|\$$/g,'')}$$` : content;
   el.innerHTML = `<span class="hint">Doğru → | ← Yanlış</span><div class="mathwrap">${body}</div>`;
   el.dataset.answer = item.isTrue ? 'right' : 'left';
@@ -60,19 +58,24 @@ function mountNextCard() {
   attachDrag(el);
 }
 
-function handleJudgement(el, dir){
-  const correctDir = el.dataset.answer; // 'right' if statement true, else 'left'
-  const isCorrect = (dir === correctDir);
-  // feedback label should reflect the TRUTH of the statement, not just correctness
-  const truthLabel = (correctDir === 'right') ? 'Doğru' : 'Yanlış';
-  const oppositeLabel = (truthLabel === 'Doğru') ? 'Yanlış' : 'Doğru';
+function applyFeedbackForDirection(dir){
+  FEEDBACK.classList.remove('good','bad');
+  if (dir === 'right') {
+    FEEDBACK.textContent = 'Doğru ✅';
+    FEEDBACK.classList.add('good');
+  } else {
+    FEEDBACK.textContent = 'Yanlış ❌';
+    FEEDBACK.classList.add('bad');
+  }
+}
 
+function judgeScore(el, dir){
+  const correctDir = el.dataset.answer; // 'right' or 'left'
+  const isCorrect = (dir === correctDir);
   if (isCorrect) {
     score++; combo++; if (combo > bestCombo) bestCombo = combo;
-    FEEDBACK.textContent = truthLabel + ' ✅';
   } else {
     combo = 0;
-    FEEDBACK.textContent = oppositeLabel + ' ❌';
   }
   POINTS.textContent = score;
   COUNT.textContent = index + 1;
@@ -109,7 +112,8 @@ function attachDrag(el) {
   };
 
   const decide = (dir) => {
-    handleJudgement(el, dir);
+    applyFeedbackForDirection(dir);   // always show the chosen direction label
+    judgeScore(el, dir);              // scoring by correctness
     const flyX = dir === 'right' ? window.innerWidth : -window.innerWidth;
     el.style.transition = 'transform 280ms ease-out, opacity 280ms ease-out';
     el.style.transform = `translate(${flyX}px, ${currentY}px) rotate(${flyX/25}deg)`;
@@ -164,7 +168,8 @@ BTN_WRONG.onclick = ()=> decideButton('left');
 function decideButton(dir){
   const tc = topCard();
   if(!tc) return;
-  handleJudgement(tc, dir);
+  applyFeedbackForDirection(dir);
+  judgeScore(tc, dir);
   const offX = dir === 'right' ? window.innerWidth : -window.innerWidth;
   tc.style.transition = 'transform 280ms ease-out, opacity 280ms ease-out';
   tc.style.transform = `translate(${offX}px, 0) rotate(${offX/25}deg)`;
