@@ -1,8 +1,10 @@
-// Türev Tokadı v2 — Feedback follows swipe direction
+// Derivative Duel — KaTeX + English UI + Hint on wrong
 const DECK = document.getElementById('deck');
 const COUNT = document.getElementById('count');
 const POINTS = document.getElementById('points');
 const FEEDBACK = document.getElementById('feedback');
+const FB_LINE = document.getElementById('fb-line');
+const HINT_LINE = document.getElementById('hint-line');
 const RESULT = document.getElementById('result');
 const FINAL = document.getElementById('finalScore');
 const ACC = document.getElementById('accuracy');
@@ -27,9 +29,16 @@ async function loadCards() {
   cards = data.slice(0, 10);
 }
 
-function typeset(el){
-  if (window.MathJax && MathJax.startup && MathJax.typesetPromise) {
-    return MathJax.startup.promise.then(()=>MathJax.typesetPromise([el])).catch(()=>{});
+function katexRender(el){
+  if (window.renderMathInElement) {
+    renderMathInElement(el, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false},
+        {left: "\(", right: "\)", display: false},
+        {left: "\[", right: "\]", display: true}
+      ]
+    });
   }
 }
 
@@ -37,12 +46,12 @@ function cardElement(item, z) {
   const el = document.createElement('div');
   el.className = 'card';
   el.style.zIndex = z;
-  const content = item.tex ? item.tex : item.text;
-  const body = item.tex ? `$$${content.replace(/^\$|\$$/g,'')}$$` : content;
-  el.innerHTML = `<span class="hint">Doğru → | ← Yanlış</span><div class="mathwrap">${body}</div>`;
+  const content = item.tex ? `$$${item.tex}$$` : (item.text || '');
+  el.innerHTML = `<span class="hint">True → | ← False</span><div class="mathwrap">${content}</div>`;
   el.dataset.answer = item.isTrue ? 'right' : 'left';
-  el.dataset.badge = item.isTrue ? 'DOĞRU' : 'YANLIŞ';
-  typeset(el);
+  el.dataset.badge = item.isTrue ? 'TRUE' : 'FALSE';
+  if (item.hint_tex) el.dataset.hint = item.hint_tex;
+  katexRender(el);
   return el;
 }
 
@@ -56,16 +65,29 @@ function mountNextCard() {
   const el = cardElement(item, 100 - index);
   DECK.appendChild(el);
   attachDrag(el);
+  // clear feedback/hint
+  FB_LINE.textContent = '';
+  FB_LINE.classList.remove('good','bad');
+  HINT_LINE.textContent = '';
 }
 
-function applyFeedbackForDirection(dir){
-  FEEDBACK.classList.remove('good','bad');
+function applyFeedback(dir, el){
+  FB_LINE.classList.remove('good','bad');
   if (dir === 'right') {
-    FEEDBACK.textContent = 'Doğru ✅';
-    FEEDBACK.classList.add('good');
+    FB_LINE.textContent = 'Correct ✅';
+    FB_LINE.classList.add('good');
+    HINT_LINE.textContent = '';
   } else {
-    FEEDBACK.textContent = 'Yanlış ❌';
-    FEEDBACK.classList.add('bad');
+    FB_LINE.textContent = 'Wrong ❌';
+    FB_LINE.classList.add('bad');
+    // show hint (correct statement)
+    const h = el.dataset.hint || '';
+    if (h) {
+      HINT_LINE.innerHTML = `Hint: $$${h}$$`;
+      katexRender(HINT_LINE);
+    } else {
+      HINT_LINE.textContent = 'Hint: Review derivative rules.';
+    }
   }
 }
 
@@ -112,8 +134,8 @@ function attachDrag(el) {
   };
 
   const decide = (dir) => {
-    applyFeedbackForDirection(dir);   // always show the chosen direction label
-    judgeScore(el, dir);              // scoring by correctness
+    applyFeedback(dir, el);
+    judgeScore(el, dir);
     const flyX = dir === 'right' ? window.innerWidth : -window.innerWidth;
     el.style.transition = 'transform 280ms ease-out, opacity 280ms ease-out';
     el.style.transform = `translate(${flyX}px, ${currentY}px) rotate(${flyX/25}deg)`;
@@ -158,7 +180,7 @@ function endGame() {
   FINAL.textContent = score;
   const acc = Math.round((score / cards.length) * 100);
   ACC.textContent = acc;
-  COMBO.textContent = bestCombo >= 3 ? `🔥 En iyi seri: ${bestCombo}` : '';
+  COMBO.textContent = bestCombo >= 3 ? `🔥 Best streak: ${bestCombo}` : '';
   REPLAY.onclick = () => location.reload();
 }
 
@@ -168,7 +190,7 @@ BTN_WRONG.onclick = ()=> decideButton('left');
 function decideButton(dir){
   const tc = topCard();
   if(!tc) return;
-  applyFeedbackForDirection(dir);
+  applyFeedback(dir, tc);
   judgeScore(tc, dir);
   const offX = dir === 'right' ? window.innerWidth : -window.innerWidth;
   tc.style.transition = 'transform 280ms ease-out, opacity 280ms ease-out';

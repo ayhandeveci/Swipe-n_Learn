@@ -1,82 +1,102 @@
 [
   {
-    "tex": "\\dfrac{d}{dx}\\big(x^2\\big)=2x",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(x^2)=2x",
+    "isTrue": true,
+    "hint_tex": "\\frac{d}{dx}(x^2)=2x"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\sin x)=\\cos x",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(\\sin x)=\\cos x",
+    "isTrue": true,
+    "hint_tex": "\\cos x"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\cos x)=\\sin x",
-    "isTrue": false
+    "tex": "\\frac{d}{dx}(e^x)=e^x",
+    "isTrue": true,
+    "hint_tex": "e^x"
   },
   {
-    "tex": "\\dfrac{d}{dx}(e^x)=e^x",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(\\tan x)=\\sec^2 x",
+    "isTrue": true,
+    "hint_tex": "\\sec^2 x"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\ln x)=\\dfrac{1}{x^2}",
-    "isTrue": false
+    "tex": "\\frac{d}{dx}(\\sqrt{x})=\\frac{1}{2\\sqrt{x}}",
+    "isTrue": true,
+    "hint_tex": "\\frac{1}{2\\sqrt{x}}"
   },
   {
-    "text": "Sabit bir sayının türevi sıfırdır.",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(x^n)=n x^{n-1}",
+    "isTrue": true,
+    "hint_tex": "n x^{n-1}"
   },
   {
-    "tex": "\\dfrac{d}{dx}\\big(3x^3\\big)=6x^2",
-    "isTrue": false
+    "tex": "\\frac{d}{dx}(\\ln|x|)=\\frac{1}{x}",
+    "isTrue": true,
+    "hint_tex": "\\frac{1}{x}"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\tan x)=\\sec^2 x",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(a^x)=a^x\\ln a",
+    "isTrue": true,
+    "hint_tex": "a^x\\ln a"
   },
   {
-    "tex": "\\dfrac{d}{dx}(x^5)=4x^4",
-    "isTrue": false
+    "tex": "\\frac{d}{dx}\\left(\\frac{1}{x}\\right)=-\\frac{1}{x^2}",
+    "isTrue": true,
+    "hint_tex": "-\\frac{1}{x^2}"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\sqrt{x})=\\dfrac{1}{2\\sqrt{x}}",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(\\cos x)=-\\sin x",
+    "isTrue": true,
+    "hint_tex": "-\\sin x"
   },
   {
-    "tex": "\\dfrac{d}{dx}(x^n)=n x^{n-1}",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(\\arctan x)=\\frac{1}{1+x^2}",
+    "isTrue": true,
+    "hint_tex": "\\frac{1}{1+x^2}"
   },
   {
-    "text": "Ürün kuralı: d(uv)=u'v+uv'",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(\\cos x)=\\sin x",
+    "isTrue": false,
+    "hint_tex": "-\\sin x"
   },
   {
-    "text": "Zincir kuralı: (f∘g)' = f'·g'",
-    "isTrue": false
+    "tex": "\\frac{d}{dx}(\\ln x)=\\frac{1}{x^2}",
+    "isTrue": false,
+    "hint_tex": "\\frac{1}{x}"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\ln|x|)=\\dfrac{1}{x}",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(3x^3)=6x^2",
+    "isTrue": false,
+    "hint_tex": "9x^2"
   },
   {
-    "tex": "\\dfrac{d}{dx}(a^x)=a^x\\ln a",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(x^5)=4x^4",
+    "isTrue": false,
+    "hint_tex": "5x^4"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\sin x)=-\\cos x",
-    "isTrue": false
+    "tex": "\\frac{d}{dx}(\\sin x)=-\\cos x",
+    "isTrue": false,
+    "hint_tex": "\\cos x"
   },
   {
-    "tex": "\\dfrac{d}{dx}\\big(\\dfrac{1}{x}\\big)=-\\dfrac{1}{x^2}",
-    "isTrue": true
+    "tex": "\\text{The derivative of a constant is }1",
+    "isTrue": false,
+    "hint_tex": "0"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\cos x)=-\\sin x",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}|x|=1\\;\\text{ for every }x",
+    "isTrue": false,
+    "hint_tex": "\\text{undefined at }x=0"
   },
   {
-    "tex": "\\dfrac{d}{dx}(\\arctan x)=\\dfrac{1}{1+x^2}",
-    "isTrue": true
+    "tex": "\\frac{d}{dx}(\\tan x)=\\cos^2 x",
+    "isTrue": false,
+    "hint_tex": "\\sec^2 x"
   },
   {
-    "text": "d/dx(|x|) = 1 her x için",
-    "isTrue": false
+    "tex": "\\frac{d}{dx}(\\ln|x|)=\\frac{1}{x+1}",
+    "isTrue": false,
+    "hint_tex": "\\frac{1}{x}"
   }
 ]

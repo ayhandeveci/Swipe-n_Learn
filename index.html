@@ -1,26 +1,22 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Türev Tokadı — LaTeX</title>
+  <title>Derivative Duel — Swipe Right if True, Left if False</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
-  <script>
-    window.MathJax = {
-      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$','$$'], ['\\[','\\]']]},
-      startup: { ready: () => { MathJax.startup.defaultReady(); window.__MJX_READY__ = true; } },
-      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
-    };
-  </script>
-  <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
   <main>
     <header>
-      <h1>Türev Tokadı</h1>
-      <p>Doğruysa <b>sağa</b>, yanlışsa <b>sola</b> kaydır. Toplam 10 kart. <small>(LaTeX)</small></p>
+      <h1>Derivative Duel</h1>
+      <p>Swipe <b>right</b> if true, <b>left</b> if false. 10 cards total. <small>(KaTeX)</small></p>
     </header>
 
     <section id="game">
@@ -28,27 +24,30 @@
 
       <div id="hud">
         <div id="progress"><span id="count">0</span>/10</div>
-        <div id="score">Skor: <span id="points">0</span></div>
+        <div id="score">Score: <span id="points">0</span></div>
       </div>
 
       <div id="buttons">
-        <button id="wrongBtn" aria-label="Yanlış (sola)">&larr; Yanlış</button>
-        <button id="rightBtn" aria-label="Doğru (sağa)">Doğru &rarr;</button>
+        <button id="wrongBtn" aria-label="False (left)">&larr; False</button>
+        <button id="rightBtn" aria-label="True (right)">True &rarr;</button>
       </div>
 
-      <div id="feedback" role="status" aria-live="assertive"></div>
+      <div id="feedback" role="status" aria-live="assertive">
+        <div id="fb-line"></div>
+        <div id="hint-line"></div>
+      </div>
     </section>
 
     <section id="result" hidden>
-      <h2>Tur Bitti 🎉</h2>
-      <p><strong>Skorun:</strong> <span id="finalScore">0</span>/10</p>
-      <p><strong>Doğruluk:</strong> <span id="accuracy">0</span>%</p>
+      <h2>Round Complete 🎉</h2>
+      <p><strong>Your score:</strong> <span id="finalScore">0</span>/10</p>
+      <p><strong>Accuracy:</strong> <span id="accuracy">0</span>%</p>
       <p id="comboMsg"></p>
-      <button id="replay">Tekrar Oyna</button>
+      <button id="replay">Play Again</button>
     </section>
 
     <footer>
-      <small>LambdaTechCo Games — Temel Türev Pratiği (MathJax)</small>
+      <small>LambdaTechCo Games — Calculus Practice (KaTeX)</small>
     </footer>
   </main>
 

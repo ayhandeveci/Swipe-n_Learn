@@ -2,7 +2,6 @@
 :root{
   --bg:#0b0e14;
   --card:#111826;
-  --accent:#7dd3fc;
   --good:#22c55e;
   --bad:#ef4444;
   --text:#e5e7eb;
@@ -36,7 +35,7 @@ header p{margin:0; color:var(--muted)}
   will-change: transform;
 }
 .card .mathwrap{font-size:28px; line-height:1.35; margin:0}
-mjx-container[jax="CHTML"]{font-size: 125%}
+.katex{font-size:1.35em}
 .card .hint{position:absolute; top:14px; right:16px; font-size:12px; color:var(--muted)}
 .card.good::after,
 .card.bad::after{
@@ -58,9 +57,10 @@ mjx-container[jax="CHTML"]{font-size: 125%}
   font-weight:700; cursor:pointer;
 }
 #buttons button:hover{border-color:#334155}
-#feedback{height:28px; display:grid; place-items:center; color:var(--muted); margin-top:10px; font-weight:700}
-#feedback.good{color:var(--good)}
-#feedback.bad{color:var(--bad)}
+#feedback{min-height:46px; display:grid; place-items:center; gap:6px; color:var(--muted); margin-top:10px; font-weight:700; text-align:center}
+#fb-line.good{color:var(--good)}
+#fb-line.bad{color:var(--bad)}
+#hint-line{color:#cbd5e1}
 #result{text-align:center; margin-top:30px}
 #result button{
   margin-top:8px; background:#0b1220; color:var(--text);
