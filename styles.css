@@ -6,6 +6,8 @@
   --bad:#ef4444;
   --text:#e5e7eb;
   --muted:#9ca3af;
+  --chip:#0b1220;
+  --border:#1f2937;
 }
 html,body{height:100%}
 body{
@@ -20,32 +22,38 @@ main{width:min(720px, 92vw)}
 header{margin:24px 0 8px}
 h1{margin:0 0 6px; font-size:28px; letter-spacing:.2px}
 header p{margin:0; color:var(--muted)}
-#game{position:relative; height:560px}
-#deck{position:relative; width:100%; height:420px; margin:24px 0}
+#game{position:relative; height:600px}
+#deck{position:relative; width:100%; height:460px; margin:24px 0}
 .card{
   position:absolute; inset:0;
   background:linear-gradient(180deg,var(--card),#0f172a);
-  border:1px solid #1f2937;
+  border:1px solid var(--border);
   border-radius:18px;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  padding:28px;
-  display:flex; align-items:center; justify-content:center;
-  text-align:center;
-  user-select:none; touch-action:pan-y;
-  will-change: transform;
+  padding:18px 18px 16px;
+  display:flex; flex-direction:column; gap:12px;
+  user-select:none; touch-action:pan-y; will-change:transform;
 }
-.card .mathwrap{font-size:28px; line-height:1.35; margin:0}
-.katex{font-size:1.35em}
-.card .hint{position:absolute; top:14px; right:16px; font-size:12px; color:var(--muted)}
-.card.good::after,
-.card.bad::after{
-  content:attr(data-badge);
-  position:absolute; top:14px; left:16px;
-  padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700;
-  background:rgba(34,197,94,.12); color:var(--good); border:1px solid rgba(34,197,94,.35);
+.card .top{
+  display:flex; justify-content:space-between; align-items:center;
+  color:var(--muted); font-size:12px;
 }
-.card.bad::after{
-  background:rgba(239,68,68,.12); color:var(--bad); border-color:rgba(239,68,68,.35);
+.card .chips{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.chip{
+  background:var(--chip);
+  border:1px solid var(--border);
+  color:var(--muted);
+  padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700;
+}
+.badge{font-size:12px; font-weight:800}
+.card .statement{
+  flex:1; display:grid; place-items:center;
+  border:1px dashed var(--border); border-radius:14px;
+  padding:22px; text-align:center;
+}
+.card .statement .katex{font-size:1.35em}
+.card .example{
+  color:var(--muted); font-size:12px; border-top:1px solid var(--border); padding-top:8px;
 }
 #hud{display:flex; justify-content:space-between; align-items:center}
 #progress{color:var(--muted)}
@@ -53,17 +61,17 @@ header p{margin:0; color:var(--muted)}
 #buttons{display:flex; gap:12px; justify-content:center}
 #buttons button{
   background:#0b1220; color:var(--text);
-  border:1px solid #1f2937; border-radius:12px; padding:12px 16px;
+  border:1px solid var(--border); border-radius:12px; padding:12px 16px;
   font-weight:700; cursor:pointer;
 }
 #buttons button:hover{border-color:#334155}
-#feedback{min-height:46px; display:grid; place-items:center; gap:6px; color:var(--muted); margin-top:10px; font-weight:700; text-align:center}
+#feedback{min-height:52px; display:grid; place-items:center; gap:6px; color:var(--muted); margin-top:10px; font-weight:700; text-align:center}
 #fb-line.good{color:var(--good)}
 #fb-line.bad{color:var(--bad)}
 #hint-line{color:#cbd5e1}
 #result{text-align:center; margin-top:30px}
 #result button{
   margin-top:8px; background:#0b1220; color:var(--text);
-  border:1px solid #1f2937; border-radius:12px; padding:12px 16px; font-weight:700; cursor:pointer;
+  border:1px solid var(--border); border-radius:12px; padding:12px 16px; font-weight:700; cursor:pointer;
 }
 footer{margin-top:18px; color:var(--muted); text-align:center}

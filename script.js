@@ -1,4 +1,4 @@
-// Derivative Duel — KaTeX + English UI + Hint on wrong
+// Derivative Duel v2 — strict True/False labels + instant hint + structured card
 const DECK = document.getElementById('deck');
 const COUNT = document.getElementById('count');
 const POINTS = document.getElementById('points');
@@ -46,11 +46,24 @@ function cardElement(item, z) {
   const el = document.createElement('div');
   el.className = 'card';
   el.style.zIndex = z;
+
+  const rule = item.rule || 'General';
   const content = item.tex ? `$$${item.tex}$$` : (item.text || '');
-  el.innerHTML = `<span class="hint">True → | ← False</span><div class="mathwrap">${content}</div>`;
+  const example = item.example_tex ? `e.g. $$${item.example_tex}$$` : '';
+
+  el.innerHTML = `
+    <div class="top">
+      <div class="chips">
+        <span class="chip">${rule}</span>
+      </div>
+      <div class="badge">${item.isTrue ? 'TRUE' : 'FALSE'}</div>
+    </div>
+    <div class="statement">${content}</div>
+    <div class="example">${example}</div>
+  `;
+
   el.dataset.answer = item.isTrue ? 'right' : 'left';
-  el.dataset.badge = item.isTrue ? 'TRUE' : 'FALSE';
-  if (item.hint_tex) el.dataset.hint = item.hint_tex;
+  el.dataset.hint = item.hint_tex || '';
   katexRender(el);
   return el;
 }
@@ -65,7 +78,6 @@ function mountNextCard() {
   const el = cardElement(item, 100 - index);
   DECK.appendChild(el);
   attachDrag(el);
-  // clear feedback/hint
   FB_LINE.textContent = '';
   FB_LINE.classList.remove('good','bad');
   HINT_LINE.textContent = '';
@@ -74,13 +86,12 @@ function mountNextCard() {
 function applyFeedback(dir, el){
   FB_LINE.classList.remove('good','bad');
   if (dir === 'right') {
-    FB_LINE.textContent = 'Correct ✅';
+    FB_LINE.textContent = 'True ✅';
     FB_LINE.classList.add('good');
     HINT_LINE.textContent = '';
   } else {
-    FB_LINE.textContent = 'Wrong ❌';
+    FB_LINE.textContent = 'False ❌';
     FB_LINE.classList.add('bad');
-    // show hint (correct statement)
     const h = el.dataset.hint || '';
     if (h) {
       HINT_LINE.innerHTML = `Hint: $$${h}$$`;
@@ -134,8 +145,8 @@ function attachDrag(el) {
   };
 
   const decide = (dir) => {
-    applyFeedback(dir, el);
-    judgeScore(el, dir);
+    applyFeedback(dir, el);           // strict True/False label by direction
+    judgeScore(el, dir);              // scoring by correctness
     const flyX = dir === 'right' ? window.innerWidth : -window.innerWidth;
     el.style.transition = 'transform 280ms ease-out, opacity 280ms ease-out';
     el.style.transform = `translate(${flyX}px, ${currentY}px) rotate(${flyX/25}deg)`;

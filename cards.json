@@ -1,102 +1,149 @@
 [
   {
+    "rule": "Power Rule",
     "tex": "\\frac{d}{dx}(x^2)=2x",
     "isTrue": true,
-    "hint_tex": "\\frac{d}{dx}(x^2)=2x"
+    "hint_tex": "\\frac{d}{dx}(x^n)=n x^{n-1}",
+    "example_tex": "\\frac{d}{dx}(x^5)=5x^4"
   },
   {
+    "rule": "Trigonometric",
     "tex": "\\frac{d}{dx}(\\sin x)=\\cos x",
     "isTrue": true,
-    "hint_tex": "\\cos x"
+    "hint_tex": "\\cos x",
+    "example_tex": "\\frac{d}{dx}(\\sin 0)=1\\Rightarrow 1"
   },
   {
+    "rule": "Exponential",
     "tex": "\\frac{d}{dx}(e^x)=e^x",
     "isTrue": true,
-    "hint_tex": "e^x"
+    "hint_tex": "e^x",
+    "example_tex": "\\frac{d}{dx}(e^{2x})=2e^{2x}"
   },
   {
+    "rule": "Trigonometric",
     "tex": "\\frac{d}{dx}(\\tan x)=\\sec^2 x",
     "isTrue": true,
-    "hint_tex": "\\sec^2 x"
+    "hint_tex": "\\sec^2 x",
+    "example_tex": "\\frac{d}{dx}(\\tan 0)=1"
   },
   {
+    "rule": "Root",
     "tex": "\\frac{d}{dx}(\\sqrt{x})=\\frac{1}{2\\sqrt{x}}",
     "isTrue": true,
-    "hint_tex": "\\frac{1}{2\\sqrt{x}}"
+    "hint_tex": "\\frac{1}{2\\sqrt{x}}",
+    "example_tex": "\\frac{d}{dx}(\\sqrt{x})=\\frac{1}{2\\sqrt{x}}"
   },
   {
+    "rule": "General",
     "tex": "\\frac{d}{dx}(x^n)=n x^{n-1}",
     "isTrue": true,
-    "hint_tex": "n x^{n-1}"
+    "hint_tex": "n x^{n-1}",
+    "example_tex": "n=7\\Rightarrow 7x^6"
   },
   {
+    "rule": "Logarithm",
     "tex": "\\frac{d}{dx}(\\ln|x|)=\\frac{1}{x}",
     "isTrue": true,
-    "hint_tex": "\\frac{1}{x}"
+    "hint_tex": "\\frac{1}{x}",
+    "example_tex": "x>0"
   },
   {
+    "rule": "Exponential",
     "tex": "\\frac{d}{dx}(a^x)=a^x\\ln a",
     "isTrue": true,
-    "hint_tex": "a^x\\ln a"
+    "hint_tex": "a^x\\ln a",
+    "example_tex": "\\frac{d}{dx}(2^x)=2^x\\ln2"
   },
   {
+    "rule": "Reciprocal",
     "tex": "\\frac{d}{dx}\\left(\\frac{1}{x}\\right)=-\\frac{1}{x^2}",
     "isTrue": true,
-    "hint_tex": "-\\frac{1}{x^2}"
+    "hint_tex": "-\\frac{1}{x^2}",
+    "example_tex": "x\\ne 0"
   },
   {
+    "rule": "Trigonometric",
     "tex": "\\frac{d}{dx}(\\cos x)=-\\sin x",
     "isTrue": true,
-    "hint_tex": "-\\sin x"
+    "hint_tex": "-\\sin x",
+    "example_tex": "\\frac{d}{dx}(\\cos 0)=0"
   },
   {
+    "rule": "Inverse Trig",
     "tex": "\\frac{d}{dx}(\\arctan x)=\\frac{1}{1+x^2}",
     "isTrue": true,
-    "hint_tex": "\\frac{1}{1+x^2}"
+    "hint_tex": "\\frac{1}{1+x^2}",
+    "example_tex": "x=0\\Rightarrow1"
   },
   {
+    "rule": "Trigonometric",
     "tex": "\\frac{d}{dx}(\\cos x)=\\sin x",
     "isTrue": false,
-    "hint_tex": "-\\sin x"
+    "hint_tex": "-\\sin x",
+    "example_tex": "Correct: -\\sin x"
   },
   {
+    "rule": "Logarithm",
     "tex": "\\frac{d}{dx}(\\ln x)=\\frac{1}{x^2}",
     "isTrue": false,
-    "hint_tex": "\\frac{1}{x}"
+    "hint_tex": "\\frac{1}{x}",
+    "example_tex": "Correct: 1/x"
   },
   {
+    "rule": "Power Rule",
     "tex": "\\frac{d}{dx}(3x^3)=6x^2",
     "isTrue": false,
-    "hint_tex": "9x^2"
+    "hint_tex": "9x^2",
+    "example_tex": "Correct: 3\\cdot3x^2"
   },
   {
+    "rule": "Power Rule",
     "tex": "\\frac{d}{dx}(x^5)=4x^4",
     "isTrue": false,
-    "hint_tex": "5x^4"
+    "hint_tex": "5x^4",
+    "example_tex": "Correct: 5x^4"
   },
   {
+    "rule": "Trigonometric",
     "tex": "\\frac{d}{dx}(\\sin x)=-\\cos x",
     "isTrue": false,
-    "hint_tex": "\\cos x"
+    "hint_tex": "\\cos x",
+    "example_tex": "Correct: +\\cos x"
   },
   {
+    "rule": "Constant",
     "tex": "\\text{The derivative of a constant is }1",
     "isTrue": false,
-    "hint_tex": "0"
+    "hint_tex": "0",
+    "example_tex": "\\frac{d}{dx}(7)=0"
   },
   {
+    "rule": "Absolute Value",
     "tex": "\\frac{d}{dx}|x|=1\\;\\text{ for every }x",
     "isTrue": false,
-    "hint_tex": "\\text{undefined at }x=0"
+    "hint_tex": "\\text{undefined at }x=0",
+    "example_tex": "x\\ne0\\Rightarrow\\frac{x}{|x|}"
   },
   {
+    "rule": "Trigonometric",
     "tex": "\\frac{d}{dx}(\\tan x)=\\cos^2 x",
     "isTrue": false,
-    "hint_tex": "\\sec^2 x"
+    "hint_tex": "\\sec^2 x",
+    "example_tex": "Correct: \\sec^2 x"
   },
   {
+    "rule": "Logarithm",
     "tex": "\\frac{d}{dx}(\\ln|x|)=\\frac{1}{x+1}",
     "isTrue": false,
-    "hint_tex": "\\frac{1}{x}"
+    "hint_tex": "\\frac{1}{x}",
+    "example_tex": "Correct: 1/x"
+  },
+  {
+    "rule": "Product Rule",
+    "tex": "\\text{Product rule: }\\frac{d}{dx}(uv)=u'v-u'v'",
+    "isTrue": false,
+    "hint_tex": "u'v+uv'",
+    "example_tex": "Correct: plus sign"
   }
 ]
