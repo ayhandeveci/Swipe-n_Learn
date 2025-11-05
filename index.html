@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swipe Derivative — Doğruysa Sağa, Yanlışsa Sola</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Swipe Derivative</h1>
+      <p>Doğruysa <b>sağa</b>, yanlışsa <b>sola</b> kaydır. Toplam 10 kart.</p>
+    </header>
+
+    <section id="game">
+      <div id="deck" aria-live="polite"></div>
+
+      <div id="hud">
+        <div id="progress"><span id="count">0</span>/10</div>
+        <div id="score">Skor: <span id="points">0</span></div>
+      </div>
+
+      <div id="buttons">
+        <button id="wrongBtn" aria-label="Yanlış (sola)">&larr; Yanlış</button>
+        <button id="rightBtn" aria-label="Doğru (sağa)">Doğru &rarr;</button>
+      </div>
+
+      <div id="feedback" role="status" aria-live="assertive"></div>
+    </section>
+
+    <section id="result" hidden>
+      <h2>Tur Bitti 🎉</h2>
+      <p><strong>Skorun:</strong> <span id="finalScore">0</span>/10</p>
+      <p><strong>Doğruluk:</strong> <span id="accuracy">0</span>%</p>
+      <p id="comboMsg"></p>
+      <button id="replay">Tekrar Oyna</button>
+    </section>
+
+    <footer>
+      <small>LambdaTechCo Games — Temel Türev Pratiği</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
