@@ -1,4 +1,4 @@
-// LaTeX (MathJax) enabled version
+// Türev Tokadı — Fixes: MathJax ready + truthful feedback labels
 const DECK = document.getElementById('deck');
 const COUNT = document.getElementById('count');
 const POINTS = document.getElementById('points');
@@ -20,7 +20,6 @@ let bestCombo = 0;
 async function loadCards() {
   const res = await fetch('cards.json');
   const data = await res.json();
-  // Shuffle & pick first 10
   for (let i = data.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [data[i], data[j]] = [data[j], data[i]];
@@ -28,18 +27,24 @@ async function loadCards() {
   cards = data.slice(0, 10);
 }
 
+function typeset(el){
+  // Ensure MathJax has loaded
+  if (window.MathJax && MathJax.startup && MathJax.typesetPromise) {
+    return MathJax.startup.promise.then(()=>MathJax.typesetPromise([el])).catch(()=>{});
+  }
+}
+
 function cardElement(item, z) {
   const el = document.createElement('div');
   el.className = 'card';
   el.style.zIndex = z;
   const content = item.tex ? item.tex : item.text;
-  el.innerHTML = `<span class="hint">Doğru → | ← Yanlış</span><div class="mathwrap">${content}</div>`;
+  // force display style look with $$ ... $$ when tex given
+  const body = item.tex ? `$$${content.replace(/^\$|\$$/g,'')}$$` : content;
+  el.innerHTML = `<span class="hint">Doğru → | ← Yanlış</span><div class="mathwrap">${body}</div>`;
   el.dataset.answer = item.isTrue ? 'right' : 'left';
   el.dataset.badge = item.isTrue ? 'DOĞRU' : 'YANLIŞ';
-  // Typeset just this card (when MathJax is ready)
-  if (window.MathJax && MathJax.typesetPromise) {
-    MathJax.typesetPromise([el]);
-  }
+  typeset(el);
   return el;
 }
 
@@ -53,6 +58,24 @@ function mountNextCard() {
   const el = cardElement(item, 100 - index);
   DECK.appendChild(el);
   attachDrag(el);
+}
+
+function handleJudgement(el, dir){
+  const correctDir = el.dataset.answer; // 'right' if statement true, else 'left'
+  const isCorrect = (dir === correctDir);
+  // feedback label should reflect the TRUTH of the statement, not just correctness
+  const truthLabel = (correctDir === 'right') ? 'Doğru' : 'Yanlış';
+  const oppositeLabel = (truthLabel === 'Doğru') ? 'Yanlış' : 'Doğru';
+
+  if (isCorrect) {
+    score++; combo++; if (combo > bestCombo) bestCombo = combo;
+    FEEDBACK.textContent = truthLabel + ' ✅';
+  } else {
+    combo = 0;
+    FEEDBACK.textContent = oppositeLabel + ' ❌';
+  }
+  POINTS.textContent = score;
+  COUNT.textContent = index + 1;
 }
 
 function attachDrag(el) {
@@ -86,18 +109,7 @@ function attachDrag(el) {
   };
 
   const decide = (dir) => {
-    const correctDir = el.dataset.answer;
-    const isCorrect = (dir === correctDir);
-    if (isCorrect) {
-      score++; combo++; if (combo > bestCombo) bestCombo = combo;
-      FEEDBACK.textContent = 'Doğru ✅';
-    } else {
-      combo = 0;
-      FEEDBACK.textContent = 'Yanlış ❌';
-    }
-    POINTS.textContent = score;
-    COUNT.textContent = index + 1;
-
+    handleJudgement(el, dir);
     const flyX = dir === 'right' ? window.innerWidth : -window.innerWidth;
     el.style.transition = 'transform 280ms ease-out, opacity 280ms ease-out';
     el.style.transform = `translate(${flyX}px, ${currentY}px) rotate(${flyX/25}deg)`;
@@ -128,7 +140,6 @@ function attachDrag(el) {
   window.addEventListener('mouseup', onPointerUp);
   window.addEventListener('touchend', onPointerUp);
 
-  // expose decide for button usage
   el.decide = decide;
 }
 
@@ -153,18 +164,7 @@ BTN_WRONG.onclick = ()=> decideButton('left');
 function decideButton(dir){
   const tc = topCard();
   if(!tc) return;
-  // mimic the same flow as drag
-  const correctDir = tc.dataset.answer;
-  const isCorrect = (dir === correctDir);
-  if (isCorrect) {
-    score++; combo++; if (combo > bestCombo) bestCombo = combo;
-    FEEDBACK.textContent = 'Doğru ✅';
-  } else {
-    combo = 0;
-    FEEDBACK.textContent = 'Yanlış ❌';
-  }
-  POINTS.textContent = score;
-  COUNT.textContent = index + 1;
+  handleJudgement(tc, dir);
   const offX = dir === 'right' ? window.innerWidth : -window.innerWidth;
   tc.style.transition = 'transform 280ms ease-out, opacity 280ms ease-out';
   tc.style.transform = `translate(${offX}px, 0) rotate(${offX/25}deg)`;

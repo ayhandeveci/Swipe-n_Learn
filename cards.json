@@ -1,22 +1,22 @@
 [
   {
-    "tex": "$\\\\dfrac{d}{dx}\\\\big(x^2\\\\big)=2x$",
+    "tex": "\\dfrac{d}{dx}\\big(x^2\\big)=2x",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\sin x)=\\\\cos x$",
+    "tex": "\\dfrac{d}{dx}(\\sin x)=\\cos x",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\cos x)=\\\\sin x$",
+    "tex": "\\dfrac{d}{dx}(\\cos x)=\\sin x",
     "isTrue": false
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(e^x)=e^x$",
+    "tex": "\\dfrac{d}{dx}(e^x)=e^x",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\ln x)=\\\\dfrac{1}{x^2}$",
+    "tex": "\\dfrac{d}{dx}(\\ln x)=\\dfrac{1}{x^2}",
     "isTrue": false
   },
   {
@@ -24,23 +24,23 @@
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}\\\\big(3x^3\\\\big)=6x^2$",
+    "tex": "\\dfrac{d}{dx}\\big(3x^3\\big)=6x^2",
     "isTrue": false
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\tan x)=\\\\sec^2 x$",
+    "tex": "\\dfrac{d}{dx}(\\tan x)=\\sec^2 x",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(x^5)=4x^4$",
+    "tex": "\\dfrac{d}{dx}(x^5)=4x^4",
     "isTrue": false
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\sqrt{x})=\\\\dfrac{1}{2\\\\sqrt{x}}$",
+    "tex": "\\dfrac{d}{dx}(\\sqrt{x})=\\dfrac{1}{2\\sqrt{x}}",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(x^n)=n x^{n-1}$",
+    "tex": "\\dfrac{d}{dx}(x^n)=n x^{n-1}",
     "isTrue": true
   },
   {
@@ -52,27 +52,27 @@
     "isTrue": false
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\ln|x|)=\\\\dfrac{1}{x}$",
+    "tex": "\\dfrac{d}{dx}(\\ln|x|)=\\dfrac{1}{x}",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(a^x)=a^x\\\\ln a$",
+    "tex": "\\dfrac{d}{dx}(a^x)=a^x\\ln a",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\sin x)=-\\\\cos x$",
+    "tex": "\\dfrac{d}{dx}(\\sin x)=-\\cos x",
     "isTrue": false
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}\\\\big(\\\\dfrac{1}{x}\\\\big)=-\\\\dfrac{1}{x^2}$",
+    "tex": "\\dfrac{d}{dx}\\big(\\dfrac{1}{x}\\big)=-\\dfrac{1}{x^2}",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\cos x)=-\\\\sin x$",
+    "tex": "\\dfrac{d}{dx}(\\cos x)=-\\sin x",
     "isTrue": true
   },
   {
-    "tex": "$\\\\dfrac{d}{dx}(\\\\arctan x)=\\\\dfrac{1}{1+x^2}$",
+    "tex": "\\dfrac{d}{dx}(\\arctan x)=\\dfrac{1}{1+x^2}",
     "isTrue": true
   },
   {

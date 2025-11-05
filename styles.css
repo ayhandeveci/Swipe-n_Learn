@@ -35,7 +35,9 @@ header p{margin:0; color:var(--muted)}
   user-select:none; touch-action:pan-y;
   will-change: transform;
 }
-.card .mathwrap{font-size:26px; line-height:1.35; margin:0}
+.card .mathwrap{font-size:28px; line-height:1.35; margin:0}
+/* Make MathJax output slightly larger like textbook display math */
+mjx-container[jax="CHTML"]{font-size: 125%}
 .card .hint{position:absolute; top:14px; right:16px; font-size:12px; color:var(--muted)}
 .card.good::after,
 .card.bad::after{
